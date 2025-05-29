@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Heatmap Example</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <style>
+    #map {
+      height: 100vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<!-- Leaflet Heat plugin -->
+<script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+
+<script>
+  // Initialize the map
+  const map = L.map('map').setView([40.730610, -73.935242], 12); // New York City
+
+  // Add OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
+
+  // Sample heatmap data (latitude, longitude, intensity)
+  const heatData = [
+    [40.7128, -74.0060, 0.8],  // Lower Manhattan
+    [40.730610, -73.935242, 0.6], // East Village
+    [40.741895, -73.989308, 0.7], // Flatiron District
+    [40.7580, -73.9855, 0.9], // Times Square
+    [40.7527, -73.9772, 0.5], // Midtown
+    [40.748817, -73.985428, 1.0], // Empire State Building
+    [40.7003, -74.0122, 0.6], // Battery Park
+  ];
+
+  // Add heatmap layer
+  L.heatLayer(heatData, {
+    radius: 25,
+    blur: 15,
+    maxZoom: 17,
+  }).addTo(map);
+</script>
+
+</body>
+</html>
